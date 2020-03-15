@@ -25,16 +25,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}else{
-		out,err = exec.Command("sh", "./countFiles.sh").Output()
+		fmt.Printf("'ls -1' cmd:\n%s\n", out)
 	}
+	out,err = exec.Command("sh", "./countFiles.sh").Output()
 
 	if err != nil {
 		log.Fatal(err)
 	}else{
-		sNmb := string(numRegEx.Find(out))
-		fmt.Printf("'number of files in dir' cmd:\n'%v'\n", sNmb)
-		nmb,_ := strconv.ParseFloat(sNmb, 64)
-		fmt.Printf("'number of files in dir' cmd:\n%v\n", nmb)
+		sNmbStr := string(numRegEx.Find(out))
+		fmt.Printf("'ls -1 | wc -l' response:\n'%v'\n", sNmbStr)
+		nmb,_ := strconv.ParseFloat(sNmbStr, 64)
+		fmt.Printf("'number of files in dir (float64)':\n%v\n", nmb)
 	}
 
 }
